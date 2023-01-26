@@ -1,0 +1,9 @@
+*,*:hover,*:active {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.App {
+    min-height: 130vh;
+}

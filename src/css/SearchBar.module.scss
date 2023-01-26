@@ -1,0 +1,21 @@
+@import "vars";
+
+.searchBar {
+    padding: 0 10px;
+    display: flex;
+    border-radius: $borderRadius;
+    min-height: 50px;
+    background-color: $bgAccent;
+    min-width: 70px;
+    max-width: 100%;
+    font-size: 20px;
+    align-items: center;
+    justify-content: start;
+}
+
+.searchBar_input {
+    margin-left: 10px;
+    height: 50px;
+    max-width: calc(100% - 40px);
+    background-color: transparent;
+}

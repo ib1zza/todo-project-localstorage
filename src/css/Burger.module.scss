@@ -1,0 +1,63 @@
+@import "vars";
+.burger {
+  position: fixed;
+  top: 70px;
+  right: 0;
+  @media screen and (min-width: 570px) {
+    display: none;
+  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  background-color: #cccccc;
+  width: 40px;
+  padding: 10px;
+  border-radius: 10px;
+  height: 40px;
+  cursor: pointer;
+  z-index: 100;
+  font-size: 24px;
+}
+
+
+.burgerBg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $bgModal;
+  opacity: $modalOpacity;
+  z-index: 99;
+}
+
+.burgerContent {
+  z-index: 100;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 80%;
+  max-width: 230px;
+  height: 100%;
+  padding: 10px;
+  padding-top: 60px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+
+
+  &>*{
+    width: 100%;
+  }
+
+  &>*:not(:last-child) {
+    margin-bottom: 10px;
+  }
+}
+

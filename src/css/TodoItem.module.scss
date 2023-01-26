@@ -1,0 +1,85 @@
+@import "vars";
+
+.todoContainer {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  border: 4px solid $bgDark;
+  border-radius: $borderRadius;
+  padding: 10px;
+}
+
+.todoContainer_Editing {
+  border: 4px solid black;
+  background-color: #ececec;
+}
+
+.todo_block__description {
+  display: flex;
+  justify-content: start;
+  width: 70%;
+  white-space: nowrap; /* Текст не переносится */
+  overflow: hidden; /* Обрезаем всё за пределами блока */
+  text-overflow: ellipsis; /* Добавляем многоточие */
+}
+
+.completeButton:disabled {
+  visibility: hidden;
+}
+.completeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  margin-right: 15px;
+  font-size: 40px;
+  color: $completeColor;
+  background-color: transparent;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+}
+.buttons>:not(:last-child) {
+  margin-right: 10px;
+}
+
+.p1 {
+  border-color: $priority1;
+}
+
+.p2 {
+  border-color: $priority2;
+}
+
+.p3 {
+  border-color: $priority3;
+}
+
+.p4 {
+  border-color: $priority4;
+}
+
+.buttonEdit {
+
+}
+
+
+@media screen and (max-width: 850px) {
+
+  .buttons {
+
+  }
+  .buttonEdit {
+    display: none;
+  }
+  .completeButton {
+    width: 30px;
+    height: 30px;
+    font-size: 30px;
+  }
+
+}
+

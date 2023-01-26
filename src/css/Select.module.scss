@@ -1,0 +1,23 @@
+@import "vars";
+
+.select {
+    background-color: $bgAccent;
+    border-radius: 10px;
+    padding: 5px 10px;
+    border: 1px solid $bgDark;
+    cursor: pointer;
+}
+
+
+.select::after {
+    content: "";
+    width: 0.8em;
+    height: 0.5em;
+    background-color: transparent;
+    pointer-events: none;
+    clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+}
+
+.select:active, .select:focus {
+    //background-color: $bgAccent;
+}
