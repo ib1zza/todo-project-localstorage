@@ -81,7 +81,10 @@ const HomePage: React.FC = () => {
             <div>
               <Button
                 style={{ borderRadius: "50%" }}
-                onClick={() => setModal((modal) => !modal)}
+                onClick={() => {
+                   setMenu(!menu);
+                  setModal((modal) => !modal)
+                }}
               >
                 <FontAwesomeIcon icon={faPlus} fontSize={"30px"} />
               </Button>
@@ -92,7 +95,7 @@ const HomePage: React.FC = () => {
 
       {modal && (
         <Modal
-          title={"Create new task"}
+
           hideF={() => setModal((modal) => !modal)}
         >
           <CreateTaskForm hideModal={() => setModal((modal) => !modal)} />

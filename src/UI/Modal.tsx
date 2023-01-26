@@ -5,10 +5,10 @@ import { motion } from "framer-motion";
 interface ModalProps {
   hideF: () => void;
   children?: React.ReactNode;
-  title?: string;
+
 }
 
-const Modal: React.FC<ModalProps> = ({ hideF, children, title }) => {
+const Modal: React.FC<ModalProps> = ({ hideF, children }) => {
   return (
     <>
       <motion.div
@@ -25,7 +25,6 @@ const Modal: React.FC<ModalProps> = ({ hideF, children, title }) => {
         transition={{ duration: 0.2, ease: "easeInOut" }}
       >
         <div className={s.modalContent} onClick={(e) => e.stopPropagation()}>
-          {title ? <div className={s.modalTitle}>{title}</div> : null}
           {children}
         </div>
       </motion.div>

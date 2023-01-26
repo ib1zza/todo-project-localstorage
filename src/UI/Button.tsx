@@ -2,13 +2,13 @@ import React from "react";
 import s from "../css/Button.module.scss";
 interface ButtonProps {
   children?: React.ReactNode;
-
+  className?: string;
   [x: string]: any;
 }
 
-const Button: React.FC<ButtonProps> = ({ children, ...rest }) => {
+const Button: React.FC<ButtonProps> = ({ children, className,  ...rest }) => {
   return (
-    <button className={s.button} {...rest}>
+    <button className={s.button +( className ? " " + className : "")} {...rest}>
       {children}
     </button>
   );
