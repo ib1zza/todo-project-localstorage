@@ -38,6 +38,11 @@
 
         grid-template-columns:  1fr;
         grid-template-areas: "title"  "description" "   select" " button";
+
+        .input__description {
+            height: 50px;
+
+        }
     }
 }
 
@@ -64,6 +69,7 @@
 
 .input__description {
     grid-area: description;
+
 }
 
 .select {

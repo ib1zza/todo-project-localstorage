@@ -38,11 +38,7 @@ const TodoList: React.FC = () => {
   };
   return (
     <div className={s.todolistContainer}>
-      {/*{loading && (*/}
-      {/*  <div className={s.todolistContainerBlur}>*/}
-      {/*    <FadeLoader color="#fff" height={30} margin={15} width={6} />*/}
-      {/*  </div>*/}
-      {/*)}*/}
+
       {list.length ? null : <div className={s.errorMsg}>no todos found</div>}
       <AnimatePresence>
         {searchedMas.map((el) => {

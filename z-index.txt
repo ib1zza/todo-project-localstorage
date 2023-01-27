@@ -1,0 +1,4 @@
+main: 0-10
+header: 11-20
+burger: 100-110
+modal: 200-210

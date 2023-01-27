@@ -11,8 +11,7 @@
     align-items: center;
     justify-content: center;
     background-color: $bgModal;
-    opacity: $modalOpacity;
-    z-index: 99;
+    z-index: 202;
 }
 
 .modalBlock {
@@ -22,15 +21,11 @@
     height: 100vh;
     width: 100%;
     background-color: transparent;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    z-index: 100;
+    z-index: 210;
 }
 
 .modalContent {
-
+    position: absolute;
+    top: 100px;
     width: 100%;
-
 }

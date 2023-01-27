@@ -14,8 +14,8 @@ const Modal: React.FC<ModalProps> = ({ hideF, children }) => {
       <motion.div
         className={s.modalBg}
         initial={{ opacity: 0 }}
-        animate={{ opacity: 0.4 }}
-      ></motion.div>
+        animate={{ opacity: 0.8 }}
+      />
       <motion.div
         className={s.modalBlock}
         onClick={hideF}

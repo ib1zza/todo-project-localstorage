@@ -1,0 +1,77 @@
+
+.burger__background {
+  height: 1000px;
+  z-index: 100;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 80%;
+  background: #fff;
+}
+
+
+@media screen and (min-width: 570px) {
+  .header__burger {
+    display: none;
+  }
+}
+.header__burger__button {
+  position: fixed;
+  top:  calc(10px);
+  right: calc(40px - 30px);
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+
+  z-index: 110;
+}
+
+
+.header__burger__nav {
+  width: 80%;
+  //padding-top: 80px;
+  padding: 80px 30px;
+  position: fixed;
+  top: 0;
+  z-index: 105;
+
+  height: 130vh;
+  background-color: transparent;
+  right: 0;
+}
+.header__burger__createTask {
+  width: 100%;
+  margin-bottom: 30px;
+  font-size: 18px;
+  justify-content: space-between;
+  padding: 10px 20px;
+}
+.header__burger__nav__link {
+  padding: 18px 0;
+  font-family: "Roboto", sans-serif;
+  font-size: 18px;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+
+  a {
+    color: #1E1E1E;
+    font-weight: bold;
+
+  }
+  z-index: 11;
+}
+.header__burger__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10;
+  display: block;
+  background-color: rgba(0, 0, 0, 0.8);
+}

@@ -11,19 +11,20 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons/faPlus";
 import SearchBar from "../UI/SearchBar";
 import { setCurrentSort, setSearchQuery } from "../store/reducers/TodoSlice";
-import Burger from "../UI/Burger";
+
 import { SortOptions, SortType } from "../types";
+
 
 const HomePage: React.FC = () => {
   const dispatch = useAppDispatch();
-  const [modal, setModal] = useState(false);
-  const [menu, setMenu] = useState(false);
+
+
   const searchQuery = useAppSelector((state) => state.todo.searchQuery);
   const sort = useAppSelector((state) => state.todo.currentSortUncompleted);
 
   return (
-    <div style={{ marginTop: "50px" }}>
-      <Wrapper>
+
+      <Wrapper className={s.wrapper}>
         <div className={s.HomePageWrapper}>
           <div className={s.todoBlock}>
             <TodoList />
@@ -49,59 +50,53 @@ const HomePage: React.FC = () => {
               ))}
             </SortSelect>
             <div>
-              <Button
-                style={{ borderRadius: "50%" }}
-                onClick={() => setModal((modal) => !modal)}
-              >
-                <FontAwesomeIcon icon={faPlus} fontSize={"30px"} />
-              </Button>
+              {/*<Button*/}
+              {/*  style={{ borderRadius: "50%" }}*/}
+              {/*  onClick={() => setModal((modal) => !modal)}*/}
+              {/*>*/}
+              {/*  <FontAwesomeIcon icon={faPlus} fontSize={"30px"} />*/}
+              {/*</Button>*/}
             </div>
           </div>
 
-          <Burger isActive={menu} hideF={() => setMenu(!menu)}>
-            <h1 className={s.header}>sort & search</h1>
-            <SearchBar
-              value={searchQuery}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                dispatch(setSearchQuery(e.target.value))
-              }
-            />
-            <SortSelect
-              sort={sort}
-              onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-                dispatch(setCurrentSort(e.target.value as SortType));
-              }}
-            >
-              {SortOptions.map((el) => (
-                <option value={el} key={el}>
-                  by {el}
-                </option>
-              ))}
-            </SortSelect>
-            <div>
-              <Button
-                style={{ borderRadius: "50%" }}
-                onClick={() => {
-                   setMenu(!menu);
-                  setModal((modal) => !modal)
-                }}
-              >
-                <FontAwesomeIcon icon={faPlus} fontSize={"30px"} />
-              </Button>
-            </div>
-          </Burger>
+
+
+          {/*<Burger isActive={menu} hideF={() => setMenu(!menu)}>*/}
+          {/*  <h1 className={s.header}>sort & search</h1>*/}
+          {/*  <SearchBar*/}
+          {/*    value={searchQuery}*/}
+          {/*    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>*/}
+          {/*      dispatch(setSearchQuery(e.target.value))*/}
+          {/*    }*/}
+          {/*  />*/}
+          {/*  <SortSelect*/}
+          {/*    sort={sort}*/}
+          {/*    onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {*/}
+          {/*      dispatch(setCurrentSort(e.target.value as SortType));*/}
+          {/*    }}*/}
+          {/*  >*/}
+          {/*    {SortOptions.map((el) => (*/}
+          {/*      <option value={el} key={el}>*/}
+          {/*        by {el}*/}
+          {/*      </option>*/}
+          {/*    ))}*/}
+          {/*  </SortSelect>*/}
+          {/*  <div>*/}
+          {/*    <Button*/}
+          {/*      style={{ borderRadius: "50%" }}*/}
+          {/*      onClick={() => {*/}
+          {/*         setMenu(!menu);*/}
+          {/*        setModal((modal) => !modal)*/}
+          {/*      }}*/}
+          {/*    >*/}
+          {/*      <FontAwesomeIcon icon={faPlus} fontSize={"30px"} />*/}
+          {/*    </Button>*/}
+          {/*  </div>*/}
+          {/*</Burger>*/}
         </div>
       </Wrapper>
 
-      {modal && (
-        <Modal
 
-          hideF={() => setModal((modal) => !modal)}
-        >
-          <CreateTaskForm hideModal={() => setModal((modal) => !modal)} />
-        </Modal>
-      )}
-    </div>
   );
 };
 
