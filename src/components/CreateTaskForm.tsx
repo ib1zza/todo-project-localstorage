@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useContext, useEffect, useRef, useState} from "react";
 import {useAppDispatch} from "../hooks/hooks";
 import {createTodo} from "../store/reducers/TodoSlice";
 import Button from "../UI/Button";
@@ -6,11 +6,12 @@ import Button from "../UI/Button";
 import s from "../css/CreateTaskForm.module.scss";
 import Select from "../UI/Select";
 
-interface CreateTaskFormProps {
-    hideModal: () => void;
-}
+import {useModalContext} from "../context/ModalContext";
 
-const CreateTaskForm: React.FC<CreateTaskFormProps> = ({hideModal}) => {
+
+const CreateTaskForm: React.FC = ( ) => {
+    const {setModal} = useModalContext();
+    const hideF = () => setModal(false);
     const dispatch = useAppDispatch();
     const titleRef = useRef<HTMLInputElement>(null);
 
@@ -49,7 +50,7 @@ const CreateTaskForm: React.FC<CreateTaskFormProps> = ({hideModal}) => {
                 priority: 0,
             });
 
-            hideModal();
+            hideF();
         }
     };
     return (

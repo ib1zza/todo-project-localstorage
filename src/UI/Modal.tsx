@@ -1,14 +1,18 @@
-import React from "react";
+import React, {useContext} from "react";
 import s from "../css/Modal.module.scss";
 import { motion } from "framer-motion";
 
+import {useModalContext} from "../context/ModalContext";
+
 interface ModalProps {
-  hideF: () => void;
+
   children?: React.ReactNode;
 
 }
 
-const Modal: React.FC<ModalProps> = ({ hideF, children }) => {
+const Modal: React.FC<ModalProps> = ({ children }) => {
+    const {setModal} = useModalContext();
+    const hideF = () => setModal(false);
   return (
     <>
       <motion.div

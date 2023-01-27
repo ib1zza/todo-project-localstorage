@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext} from "react";
 import {AnimatePresence, motion} from "framer-motion";
 import s from "./NewBurger.module.scss";
 import MenuToggle from "./MenuToggle/MenuToggle";
@@ -9,11 +9,8 @@ import Button from "../Button";
 import {NavLink} from "react-router-dom";
 import {AppRoutes} from "../../constants";
 
-interface Props {
-    flag: boolean;
-    onChange: (flag: boolean) => void;
-    showModal?: (x: boolean) => void
-}
+import {useModalContext} from "../../context/ModalContext";
+
 
 
 
@@ -68,7 +65,9 @@ const links = [
     { name: "goals", to: AppRoutes.todos },
 ];
 
-const NewBurger: React.FC<Props> = ({flag, onChange, showModal}) => {
+const NewBurger: React.FC = ( ) => {
+
+    const {menu: flag ,setMenu: onChange,setModal: showModal} = useModalContext();
     const toggler = () => onChange(!flag);
     return (
         <div>
@@ -92,7 +91,7 @@ const NewBurger: React.FC<Props> = ({flag, onChange, showModal}) => {
                                 <Button
                                     className={s.header__burger__createTask}
                                     onClick={() => {
-                                        showModal && showModal(true)
+                                        showModal(true)
                                         onChange(false);
                                     }}
                                 >

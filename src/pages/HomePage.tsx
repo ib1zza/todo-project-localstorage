@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, {useContext, useState} from "react";
 import TodoList from "../components/TodoList";
-import CreateTaskForm from "../components/CreateTaskForm";
-import Modal from "../UI/Modal";
+
 import Button from "../UI/Button";
 import Wrapper from "../UI/Wrapper";
 import s from "../css/HomePage.module.scss";
@@ -13,11 +12,14 @@ import SearchBar from "../UI/SearchBar";
 import { setCurrentSort, setSearchQuery } from "../store/reducers/TodoSlice";
 
 import { SortOptions, SortType } from "../types";
+import {useModalContext} from "../context/ModalContext";
+
+
 
 
 const HomePage: React.FC = () => {
   const dispatch = useAppDispatch();
-
+  const {setModal,modal} = useModalContext();
 
   const searchQuery = useAppSelector((state) => state.todo.searchQuery);
   const sort = useAppSelector((state) => state.todo.currentSortUncompleted);
@@ -50,12 +52,12 @@ const HomePage: React.FC = () => {
               ))}
             </SortSelect>
             <div>
-              {/*<Button*/}
-              {/*  style={{ borderRadius: "50%" }}*/}
-              {/*  onClick={() => setModal((modal) => !modal)}*/}
-              {/*>*/}
-              {/*  <FontAwesomeIcon icon={faPlus} fontSize={"30px"} />*/}
-              {/*</Button>*/}
+              <Button
+                style={{ borderRadius: "50%" }}
+                onClick={() => setModal(  true)}
+              >
+                <FontAwesomeIcon icon={faPlus} fontSize={"30px"} />
+              </Button>
             </div>
           </div>
 
