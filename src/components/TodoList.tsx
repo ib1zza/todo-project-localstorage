@@ -29,7 +29,7 @@ const TodoList: React.FC = () => {
 
   useEffect(() => {
     console.log("useEffectWorking");
-    // dispatch(fetchSortedTodos(sort));
+
   }, [dispatch, sort, list.length]);
   const AnimationVariants = {
     hidden: { opacity: 0, y: 0 },

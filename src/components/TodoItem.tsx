@@ -7,10 +7,10 @@ import EditForm from "./EditForm";
 import { Todo } from "../types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faCircleCheck,
-  faPenToSquare,
-  faInfo,
-  faXmark,
+    faCircleCheck,
+    faPenToSquare,
+    faInfo,
+    faXmark, faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import MouseOver from "../UI/MouseOver";
 import TodoDescription from "./TodoDescription";
@@ -25,7 +25,6 @@ interface TodoItemProps {
 const TodoItem: React.FC<TodoItemProps> = forwardRef(
   ({ todo }, ref: ForwardedRef<HTMLDivElement>) => {
     const [editMode, setEditMode] = useState(false);
-    // const [col, setCol] = useState(todo.priority);
     const dispatch = useAppDispatch();
 
     const wrapperClasses = useMemo(() => {
@@ -60,25 +59,26 @@ const TodoItem: React.FC<TodoItemProps> = forwardRef(
         <LayoutGroup id={"a"}>
           <motion.div layout className={wrapperClasses}>
             <motion.div layout className={s.todo_block__description}>
-              <button
-                disabled={editMode}
-                className={s.completeButton}
-                onClick={handleCompleteTodo}
-              >
-                <FontAwesomeIcon icon={faCircleCheck} />
-              </button>
+
 
               {editMode ? (
-                <motion.div>
+
                   <EditForm
                     prevTodo={todo}
                     onAbort={() => setEditMode(false)}
                   />
-                </motion.div>
+
               ) : (
-                <motion.div>
-                  <TodoDescription todo={todo} />
-                </motion.div>
+                  <>
+                      <button
+                          disabled={editMode}
+                          className={s.completeButton}
+                          onClick={handleCompleteTodo}
+                      >
+                          <FontAwesomeIcon icon={faCircleCheck} />
+                      </button>
+                      <TodoDescription todo={todo} />
+                  </>
               )}
             </motion.div>
 
@@ -90,18 +90,18 @@ const TodoItem: React.FC<TodoItemProps> = forwardRef(
                     <FontAwesomeIcon icon={faPenToSquare} />
                   </Button>
 
-                  <MouseOver
-                    text={
-                      "Date of creation: " +
-                      todo.createdAt.slice(0, 10) +
-                      " " +
-                      todo.createdAt.slice(11, 19)
-                    }
-                  >
-                    <FontAwesomeIcon icon={faInfo} />
-                  </MouseOver>
-                  <Button onClick={() => dispatch(deleteTodo(todo._id))}>
-                    <FontAwesomeIcon icon={faXmark} />
+                  {/*<MouseOver*/}
+                  {/*  text={*/}
+                  {/*    "Date of creation: " +*/}
+                  {/*    todo.createdAt.slice(0, 10) +*/}
+                  {/*    " " +*/}
+                  {/*    todo.createdAt.slice(11, 19)*/}
+                  {/*  }*/}
+                  {/*>*/}
+                  {/*  <FontAwesomeIcon icon={faInfo} />*/}
+                  {/*</MouseOver>*/}
+                  <Button className={s.button__delete} onClick={() => dispatch(deleteTodo(todo._id))}>
+                    <FontAwesomeIcon icon={faTrash} />
                   </Button>
                 </>
               )}

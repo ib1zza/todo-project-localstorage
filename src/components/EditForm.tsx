@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import Button from "../UI/Button";
-import { useAppDispatch, useAppSelector } from "../hooks/hooks";
+import { useAppDispatch } from "../hooks/hooks";
 
 import { Todo } from "../types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faRotateLeft } from "@fortawesome/free-solid-svg-icons";
+import {faCheck, faRotateLeft, faTrash} from "@fortawesome/free-solid-svg-icons";
 
 import s from "../css/EditForm.module.scss";
-import { editTodo } from "../store/reducers/TodoSlice";
+import {deleteTodo, editTodo} from "../store/reducers/TodoSlice";
 
 interface EditFormProps {
   prevTodo: Todo;
@@ -21,7 +21,7 @@ const EditForm: React.FC<EditFormProps> = ({ prevTodo, onAbort }) => {
     priority: prevTodo.priority,
   });
   const dispatch = useAppDispatch();
-  const titleInput = useRef<HTMLInputElement>(null);
+  const titleInput = useRef<HTMLTextAreaElement>(null);
 
   const submitHandler = () => {
     dispatch(
@@ -44,21 +44,40 @@ const EditForm: React.FC<EditFormProps> = ({ prevTodo, onAbort }) => {
     }
   }, []);
 
-  return (
+    const textareaRef = useRef<HTMLTextAreaElement>(null);
+    const [currentValue, setCurrentValue ] = useState("");
+
+    useEffect(() => {
+        if(!textareaRef.current)  return
+        textareaRef.current.style.height = "0px";
+        const scrollHeight = textareaRef.current.scrollHeight;
+        textareaRef.current.style.height = scrollHeight + "px";
+    }, [currentValue, data.description]);
+  useEffect(() => {
+    if(!titleInput.current)  return
+    titleInput.current.style.height = "0px";
+    const scrollHeight = titleInput.current.scrollHeight;
+    titleInput.current.style.height = scrollHeight + "px";
+  }, [titleInput, data.description]);
+
+    return (
     <div className={s.form_wrapper}>
       <div className={s.inputs_field}>
-        <input
+        <textarea
           ref={titleInput}
           className={s.input_title}
           placeholder={"Title"}
           value={data.title}
           onChange={(e) => setData({ ...data, title: e.target.value })}
+          maxLength={30}
         />
-        <input
+        <textarea
+            ref={textareaRef}
           className={s.input_description}
           placeholder={"Description"}
           value={data.description}
           onChange={(e) => setData({ ...data, description: e.target.value })}
+            maxLength={100}
         />
         <div className={s.priority_block}>
           <p>Priority:</p>
@@ -75,13 +94,21 @@ const EditForm: React.FC<EditFormProps> = ({ prevTodo, onAbort }) => {
         </div>
       </div>
       <div className={s.buttons}>
-        <Button onClick={submitHandler}>
+        <Button className={s.buttons__submit} onClick={submitHandler}>
           <span> Submit </span>
           <FontAwesomeIcon icon={faCheck} />
         </Button>
-        <Button onClick={onAbort}>
+        <Button className={s.buttons__cancel} onClick={onAbort}>
           <span> Cancel </span>
           <FontAwesomeIcon icon={faRotateLeft} />
+        </Button>
+        <Button className={s.buttons__delete} onClick={() => {
+          dispatch(deleteTodo(prevTodo._id));
+          onAbort();
+        }
+        }>
+
+          <FontAwesomeIcon icon={faTrash} />
         </Button>
       </div>
     </div>
