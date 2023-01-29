@@ -68,6 +68,8 @@
 
 
 .input {
+  overflow-y: hidden;
+
   &_title {
     font-size: 25px;
     font-weight: bold;

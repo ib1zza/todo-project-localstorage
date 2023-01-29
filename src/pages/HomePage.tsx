@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import TodoList from "../components/TodoList";
 
 import Button from "../UI/Button";
@@ -19,11 +19,17 @@ import {useModalContext} from "../context/ModalContext";
 
 const HomePage: React.FC = () => {
   const dispatch = useAppDispatch();
-  const {setModal,modal} = useModalContext();
-
+  const {setModal} = useModalContext();
+  const [pageWidth, setPageWidth] = useState(document.documentElement.scrollWidth);
   const searchQuery = useAppSelector((state) => state.todo.searchQuery);
   const sort = useAppSelector((state) => state.todo.currentSortUncompleted);
-
+  useEffect(() => {
+    function listener () {
+      setPageWidth(document.documentElement.scrollWidth);
+    }
+    window.addEventListener(`resize`,listener);
+    return () => window.removeEventListener("resize",listener);
+  },[])
   return (
 
       <Wrapper className={s.wrapper}>
@@ -52,12 +58,13 @@ const HomePage: React.FC = () => {
               ))}
             </SortSelect>
             <div>
-              <Button
-                style={{ borderRadius: "50%" }}
-                onClick={() => setModal(  true)}
-              >
-                <FontAwesomeIcon icon={faPlus} fontSize={"30px"} />
-              </Button>
+              {pageWidth > 570 &&
+                  <Button
+                      style={{borderRadius: "50%"}}
+                      onClick={() => setModal(true)}
+                  >
+                    <FontAwesomeIcon icon={faPlus} fontSize={"30px"}/>
+                  </Button>}
             </div>
           </div>
 
