@@ -69,12 +69,14 @@ const TodoSlice = createSlice({
         (el) => el._id === action.payload._id
       );
       state.list[elIndex] = edited;
+
       setLocalUncompleted(state.list);
     },
-    setCurrentSort: (state, action: PayloadAction<SortType>) => {
-      state.currentSortUncompleted = action.payload;
-      console.log(action.payload);
-      switch (action.payload) {
+
+    setCurrentSort: (state, action: PayloadAction<SortType >) => {
+      if(action.payload !== "current") state.currentSortUncompleted = action.payload;
+      console.log(state.currentSortUncompleted );
+      switch (state.currentSortUncompleted) {
         case SortType.DATE:
           state.list.sort((a, b) => Number(b.createdAt) - Number(a.createdAt));
           return;

@@ -1,13 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, {useEffect, useRef, useState} from "react";
 import Button from "../UI/Button";
-import { useAppDispatch } from "../hooks/hooks";
+import {useAppDispatch} from "../hooks/hooks";
 
-import { Todo } from "../types";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {SortType, Todo} from "../types";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCheck, faRotateLeft, faTrash} from "@fortawesome/free-solid-svg-icons";
 
 import s from "../css/EditForm.module.scss";
-import {deleteTodo, editTodo} from "../store/reducers/TodoSlice";
+import {deleteTodo, editTodo, setCurrentSort} from "../store/reducers/TodoSlice";
 
 interface EditFormProps {
   prevTodo: Todo;
@@ -34,6 +34,8 @@ const EditForm: React.FC<EditFormProps> = ({ prevTodo, onAbort }) => {
         status: prevTodo.status,
       })
     );
+    dispatch(setCurrentSort(SortType.CURRENT_SORT ));
+
     // dispatch(fetchSortedTodos(sorting));
     onAbort();
   };

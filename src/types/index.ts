@@ -14,6 +14,7 @@ export type TodoCompleted = Todo & {
 };
 
 export enum SortType {
+  CURRENT_SORT = "current",
   DATE = "date",
   DATE_REV = "daterev",
   PRIORITY = "priority",
