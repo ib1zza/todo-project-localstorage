@@ -2,15 +2,16 @@ import React, { ForwardedRef, useMemo, useState } from "react";
 import { useAppDispatch } from "../hooks/hooks";
 import s from "../css/TodoItem.module.scss";
 import Button from "../UI/Button";
-
+import { format } from "date-fns";
 import EditForm from "./EditForm";
 import { Todo } from "../types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-    faCircleCheck,
-    faPenToSquare,
-    faInfo,
-    faXmark, faTrash,
+  faCircleCheck,
+  faPenToSquare,
+  faInfo,
+  faXmark,
+  faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import MouseOver from "../UI/MouseOver";
 import TodoDescription from "./TodoDescription";
@@ -26,13 +27,11 @@ const TodoItem: React.FC<TodoItemProps> = forwardRef(
   ({ todo }, ref: ForwardedRef<HTMLDivElement>) => {
     const [editMode, setEditMode] = useState(false);
     const dispatch = useAppDispatch();
+    const [showDescription, setShowDescription] = useState<boolean>(false);
 
     const wrapperClasses = useMemo(() => {
       let wp = s.todoContainer;
-
-      if (editMode) {
-        return wp + " " + s.todoContainer_Editing;
-      }
+      if (editMode) return wp + " " + s.todoContainer_Editing;
       switch (todo.priority) {
         case 1:
           wp += " " + s.p1;
@@ -59,26 +58,27 @@ const TodoItem: React.FC<TodoItemProps> = forwardRef(
         <LayoutGroup id={"a"}>
           <motion.div layout className={wrapperClasses}>
             <motion.div layout className={s.todo_block__description}>
-
-
               {editMode ? (
-
-                  <EditForm
-                    prevTodo={todo}
-                    onAbort={() => setEditMode(false)}
-                  />
-
+                <EditForm prevTodo={todo} onAbort={() => setEditMode(false)} />
               ) : (
-                  <>
-                      <button
-                          disabled={editMode}
-                          className={s.completeButton}
-                          onClick={handleCompleteTodo}
-                      >
-                          <FontAwesomeIcon icon={faCircleCheck} />
-                      </button>
-                      <TodoDescription todo={todo} />
-                  </>
+                <>
+                  <div className={s.block}>
+                    <button
+                      disabled={editMode}
+                      className={s.completeButton}
+                      onClick={handleCompleteTodo}
+                    >
+                      <FontAwesomeIcon icon={faCircleCheck} />
+                    </button>
+                    <TodoDescription todo={todo} />
+                  </div>
+                  {showDescription && (
+                    <div className={s.todo_block__description__data}>
+                      <span>Date of creation:</span>{" "}
+                      {format(new Date(Number(todo.createdAt)), "Pp")}
+                    </div>
+                  )}
+                </>
               )}
             </motion.div>
 
@@ -90,17 +90,14 @@ const TodoItem: React.FC<TodoItemProps> = forwardRef(
                     <FontAwesomeIcon icon={faPenToSquare} />
                   </Button>
 
-                  {/*<MouseOver*/}
-                  {/*  text={*/}
-                  {/*    "Date of creation: " +*/}
-                  {/*    todo.createdAt.slice(0, 10) +*/}
-                  {/*    " " +*/}
-                  {/*    todo.createdAt.slice(11, 19)*/}
-                  {/*  }*/}
-                  {/*>*/}
-                  {/*  <FontAwesomeIcon icon={faInfo} />*/}
-                  {/*</MouseOver>*/}
-                  <Button className={s.button__delete} onClick={() => dispatch(deleteTodo(todo._id))}>
+                  <Button onClick={() => setShowDescription((prev) => !prev)}>
+                    <FontAwesomeIcon icon={faInfo} />
+                  </Button>
+
+                  <Button
+                    className={s.button__delete}
+                    onClick={() => dispatch(deleteTodo(todo._id))}
+                  >
                     <FontAwesomeIcon icon={faTrash} />
                   </Button>
                 </>

@@ -18,9 +18,12 @@ const TodoList: React.FC = () => {
     () =>
       [...list].filter(
         (el) =>
-          el.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          el.title.trim().toLowerCase().includes(searchQuery.toLowerCase()) ||
           (el.description &&
-            el.description.toLowerCase().includes(searchQuery.toLowerCase()))
+            el.description
+              .trim()
+              .toLowerCase()
+              .includes(searchQuery.toLowerCase()))
       ),
     [searchQuery, list]
   );
@@ -29,7 +32,6 @@ const TodoList: React.FC = () => {
 
   useEffect(() => {
     console.log("useEffectWorking");
-
   }, [dispatch, sort, list.length]);
   const AnimationVariants = {
     hidden: { opacity: 0, y: 0 },
@@ -38,7 +40,6 @@ const TodoList: React.FC = () => {
   };
   return (
     <div className={s.todolistContainer}>
-
       {list.length ? null : <div className={s.errorMsg}>no todos found</div>}
       <AnimatePresence>
         {searchedMas.map((el) => {

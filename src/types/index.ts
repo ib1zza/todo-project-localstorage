@@ -9,9 +9,7 @@ export type Todo = {
   __v?: number;
 };
 
-export type TodoCompleted = Todo & {
-  dateOfCompletion?: string;
-};
+
 
 export enum SortType {
   CURRENT_SORT = "current",

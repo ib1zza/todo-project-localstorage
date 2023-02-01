@@ -4,7 +4,12 @@ import { useAppSelector } from "../hooks/hooks";
 import { useMemo } from "react";
 
 import TodoItemCompleted from "./TodoItemCompleted";
-
+import { AnimatePresence } from "framer-motion";
+const AnimationVariants = {
+  hidden: { opacity: 0, y: 0 },
+  visible: { opacity: 1, y: 0 },
+  exit: { x: -200, opacity: 0 },
+};
 const TodoListCompleted: React.FC<{ searchQuery: string }> = ({
   searchQuery,
 }) => {
@@ -25,9 +30,21 @@ const TodoListCompleted: React.FC<{ searchQuery: string }> = ({
 
   return (
     <div className={s.todolistContainer}>
-      {searchedMas.map((el) => (
-        <TodoItemCompleted todo={el} key={el._id} />
-      ))}
+      {list.length ? null : <div className={s.errorMsg}>no todos found</div>}
+      <AnimatePresence>
+        {searchedMas.map((el) => (
+          <TodoItemCompleted
+            viewport={{ amount: 0.3 }}
+            initial={"hidden"}
+            whileInView={"visible"}
+            exit={"exit"}
+            transition={{ duration: 0.2 }}
+            variants={AnimationVariants}
+            todo={el}
+            key={el._id}
+          />
+        ))}
+      </AnimatePresence>
     </div>
   );
 };

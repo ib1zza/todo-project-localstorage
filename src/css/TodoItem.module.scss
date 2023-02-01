@@ -19,11 +19,33 @@
 
 .todo_block__description {
   display: flex;
+  flex-direction: column;
 
+  .block {
+    flex: 100% 0 0 ;
+    display: flex;
+  }
+  &__data  {
+    flex: 100% 0 0;
+  }
   flex-basis: 100%;
-  //white-space: nowrap; /* Текст не переносится */
-  //overflow: hidden; /* Обрезаем всё за пределами блока */
-  //text-overflow: ellipsis; /* Добавляем многоточие */
+
+  .other_info {
+    width: 100%;
+  }
+
+  &_completed {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    .other_info {
+      width: 100%;
+
+      div {
+        margin-bottom: 10px;
+      }
+    }
+  }
 }
 
 .completeButton {

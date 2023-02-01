@@ -57,7 +57,7 @@ const TodoSlice = createSlice({
     },
     completeTodo: (state, action: PayloadAction<string>) => {
       state.completedList.push(
-        state.list.filter((el) => el._id === action.payload)[0]
+          {...state.list.filter((el) => el._id === action.payload)[0], updatedAt: Date.now().toString()}
       );
       state.list = state.list.filter((el) => el._id !== action.payload);
       setLocalUncompleted(state.list);
@@ -72,7 +72,10 @@ const TodoSlice = createSlice({
 
       setLocalUncompleted(state.list);
     },
-
+    deleteCompletedTodo: (state, action: PayloadAction<string>) => {
+      state.completedList = state.completedList.filter((el) => el._id !== action.payload);
+      setLocalCompleted(state.completedList);
+    },
     setCurrentSort: (state, action: PayloadAction<SortType >) => {
       if(action.payload !== "current") state.currentSortUncompleted = action.payload;
       console.log(state.currentSortUncompleted );
@@ -104,7 +107,8 @@ const TodoSlice = createSlice({
       setLocalCompleted(state.completedList);
     },
     setSearchQuery: (state, action: PayloadAction<string>) => {
-      state.searchQuery = action.payload;
+
+      state.searchQuery =  action.payload.trim() ? action.payload : "";
     },
   },
 });
@@ -116,5 +120,7 @@ export const {
   editTodo,
   setSearchQuery,
   setCurrentSort,
+    deleteCompletedTodo,
+    clearState
 } = TodoSlice.actions;
 export default TodoSlice.reducer;

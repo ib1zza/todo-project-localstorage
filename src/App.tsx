@@ -1,5 +1,5 @@
-import React, {createContext, Dispatch, SetStateAction, useContext, useState} from "react";
-import { Routes, Route } from "react-router-dom";
+import React, {createContext, Dispatch, SetStateAction, useContext, useEffect, useState} from "react";
+import {Routes, Route, useNavigate, useLocation} from "react-router-dom";
 import "./App.css";
 import "./nullstyle.css";
 import HomePage from "./pages/HomePage";
@@ -11,13 +11,24 @@ import NewBurger from "./UI/Burger/NewBurger";
 import Modal from "./UI/Modal";
 import CreateTaskForm from "./components/CreateTaskForm";
 import {AnimatePresence} from "framer-motion";
-import ModalProvider, { useModalContext} from "./context/ModalContext";
+import { useModalContext} from "./context/ModalContext";
 
 
 
 function App() {
     const {modal} = useModalContext();
     console.log(modal);
+    const {pathname} = useLocation()
+
+    const navigate = useNavigate();
+
+    console.log(JSON.stringify(pathname))
+
+    useEffect(() => {
+        if(pathname !== AppRoutes.todos && pathname !== AppRoutes.completed) {
+            navigate(AppRoutes.todos)}
+    },[pathname])
+
   return (
     <div className={"App"}>
 

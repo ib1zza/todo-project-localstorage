@@ -1,6 +1,7 @@
 @import "vars";
 
 .todolistContainer {
+    margin-top: 10px;
     width: 100%;
     padding: 0;
     &>*:not(:last-child) {
@@ -27,8 +28,10 @@
 }
 
 .errorMsg {
+    text-transform: uppercase;
+
     width: 100%;
     text-align: center;
-    color: $textDark;
-    font-size: 25px;
+    color: $dark-col;
+    font-size: 30px;
 }
