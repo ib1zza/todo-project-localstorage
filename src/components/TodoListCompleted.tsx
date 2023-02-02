@@ -1,6 +1,6 @@
 import * as React from "react";
-import s from "../css/TodoList.module.scss";
-import { useAppSelector } from "../hooks/hooks";
+import s from "./TodoList/TodoList.module.scss";
+import { useAppSelector } from "../store/hooks/hooks";
 import { useMemo } from "react";
 
 import TodoItemCompleted from "./TodoItemCompleted";

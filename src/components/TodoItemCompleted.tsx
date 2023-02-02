@@ -1,11 +1,11 @@
 import React, { ForwardedRef, forwardRef, useState } from "react";
-import { useAppDispatch } from "../hooks/hooks";
-import s from "../css/TodoItem.module.scss";
-import Button from "../UI/Button";
+import { useAppDispatch } from "../store/hooks/hooks";
+import s from "./TodoItem/TodoItem.module.scss";
+import Button from "../UI/Button/Button";
 import { Todo } from "../types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfo, faTrash } from "@fortawesome/free-solid-svg-icons";
-import TodoDescription from "./TodoDescription";
+import TodoDescription from "./TodoDescription/TodoDescription";
 import { deleteCompletedTodo } from "../store/reducers/TodoSlice";
 import { format } from "date-fns";
 import { LayoutGroup, motion } from "framer-motion";

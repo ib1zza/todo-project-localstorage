@@ -1,0 +1,61 @@
+.todoBlock {
+    width: 70%;
+    display: flex;
+
+    @media screen and (max-width: 570px) {
+        margin-top: 10px;
+        width: 100%;
+        overflow: hidden;
+    }
+}
+
+.todoFilters {
+
+    display: flex;
+    flex-direction: column;
+
+    width: 30%;
+    &>*:not(:last-child) {
+        margin-bottom: 10px;
+    }
+    @media screen and (max-width: 570px) {
+        width: 100%;
+
+        &>*:not(:last-child) {
+            margin-bottom: 20px;
+        }
+    }
+
+    .button__new {
+        height: 50px;
+        width: 50px;
+    }
+
+}
+
+.header {
+    font-weight: bold;
+    text-align: center;
+    font-size: 26px;
+}
+.wrapper {
+    margin-top: 70px;
+}
+.HomePageWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0px;
+    &>*:not(:last-child) {
+        margin-right: 20px;
+        @media screen and (max-width: 570px) {
+                margin-right: 0;
+        }
+    }
+    @media screen and (max-width: 570px) {
+        flex-direction: column-reverse;
+    }
+
+
+
+}

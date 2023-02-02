@@ -1,0 +1,31 @@
+@import "src/css/vars";
+
+.modalBg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $bgModal;
+    z-index: 202;
+}
+
+.modalBlock {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    background-color: transparent;
+    z-index: 210;
+}
+
+.modalContent {
+    position: absolute;
+    top: 100px;
+    width: 100%;
+}
