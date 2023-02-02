@@ -1,22 +1,30 @@
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import s from "./Navigation.module.scss";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { AppRoutes } from "../../constants";
 import Wrapper from "../../UI/Wrapper/Wrapper";
+import MobileNav from "./MobileNav";
 
 const setStyles = ({ isActive }: { isActive: any }) => {
   return isActive ? s.link_active : s.link;
 };
 
 const Navigation: React.FC = () => {
-  const { pathname } = useLocation();
-  useEffect(() => {}, [pathname]);
+  const [pageWidth, setPageWidth] = useState(
+    document.documentElement.scrollWidth
+  );
+
+  useEffect(() => {
+    function listener() {
+      setPageWidth(document.documentElement.scrollWidth);
+    }
+    window.addEventListener(`resize`, listener);
+    return () => window.removeEventListener("resize", listener);
+  }, []);
   return (
     <div className={s.container}>
       <Wrapper>
-        <div className={s.mobileNav}>
-          <NavLink to={AppRoutes.todos}>Home</NavLink>
-        </div>
+        {pageWidth < 570 && <MobileNav />}
         <div className={s.pagesBlock}>
           <NavLink className={setStyles} to={AppRoutes.todos}>
             Home

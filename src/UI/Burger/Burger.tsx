@@ -56,8 +56,8 @@ const overlayVariants = {
 const links = [
   { name: "home", to: AppRoutes.todos },
   { name: "completed", to: AppRoutes.completed },
-  { name: "plans", to: AppRoutes.todos },
-  { name: "goals", to: AppRoutes.todos },
+  { name: "plans", to: AppRoutes.not_found },
+  { name: "goals", to: AppRoutes.not_found },
 ];
 
 const Burger: React.FC = () => {
@@ -112,7 +112,12 @@ const Burger: React.FC = () => {
                     exit={"hidden"}
                     className={s.header__burger__nav__link}
                   >
-                    <NavLink to={link.to}>{link.name}</NavLink>
+                    <NavLink
+                      className={({ isActive }) => (isActive ? s.active : "")}
+                      to={link.to}
+                    >
+                      {link.name}
+                    </NavLink>
                   </motion.div>
                 ))}
               </Navigation>
